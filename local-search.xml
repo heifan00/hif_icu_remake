@@ -4,13 +4,29 @@
   
   
   <entry>
-    <title>Hello World</title>
-    <link href="/uncategorized/undefined/"/>
-    <url>/uncategorized/undefined/</url>
+    <title>Linux服务器使用Docker容器安装Redis</title>
+    <link href="/linux_docker_redis/"/>
+    <url>/linux_docker_redis/</url>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="选择合适的Redis版本"><a href="#选择合适的Redis版本" class="headerlink" title="选择合适的Redis版本"></a>选择合适的Redis版本</h2><p>可以去docker hub中去找一下，<a href="https://hub.docker.com/_/redis?tab=tags">redis - Official Image | Docker Hub</a></p> <span id="more"></span> <p><img src="https://jsd.cdn.zzko.cn/gh/heifan00/img_bed@master/Work/hei-image.jpg"></p><p>这里我选择7.0.11版本</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo docker pull redis:7.0.11<br></code></pre></td></tr></table></figure><h2 id="新建配置文件目录及数据持久化目录"><a href="#新建配置文件目录及数据持久化目录" class="headerlink" title="新建配置文件目录及数据持久化目录"></a>新建配置文件目录及数据持久化目录</h2><blockquote><p>我放在&#x2F;docker目录下</p></blockquote><p>redis.conf文件放到配置文件目录下（没这个文件可以去官网下载）</p><p>修改配置文件信息</p><p><code>bind 127.0.0.1</code> #注释掉这部分，使redis可以外部访问&#x20;</p><p><code>daemonize no</code>#用守护线程的方式启动&#x20;</p><p><code>requirepass 你的密码</code>#给redis设置密码</p><p><code>appendonly yes</code>#redis持久化　　默认是no&#x20;</p><p><code>tcp-keepalive 300</code> #防止出现远程主机强迫关闭了一个现有的连接的错误 默认是300</p><h2 id="原神启动！"><a href="#原神启动！" class="headerlink" title="原神启动！"></a>原神启动！</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo docker run -p 6379:6379 --name redis -v /docker/redis/conf/redis.conf:/etc/redis/redis.conf  -v /docker/redis/data:/data -d redis:7.0.11 redis-server /etc/redis/redis.conf --appendonly <span class="hljs-built_in">yes</span><br>c8898e38c5fa49703c9d9ac7df91e36add9e112cbf67256c9a2b3e0dd96c3b28<br></code></pre></td></tr></table></figure>]]></content>
     
     
+    <categories>
+      
+      <category>Tutorials</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>Docker</tag>
+      
+      <tag>Redis</tag>
+      
+    </tags>
     
   </entry>
   

@@ -1,3 +1,7 @@
+https://hif.icu/linux_docker_redis/
 https://hif.icu/about/index.html
-https://hif.icu/uncategorized/undefined/
 https://hif.icu/
+https://hif.icu/tags/Linux/
+https://hif.icu/tags/Docker/
+https://hif.icu/tags/Redis/
+https://hif.icu/categories/Tutorials/

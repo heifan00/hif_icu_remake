@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://hif.icu/about/index.html</loc>
+    <loc>https://hif.icu/linux_docker_redis/</loc>
     
     <lastmod>2023-08-31</lastmod>
     
@@ -11,9 +11,9 @@
   </url>
   
   <url>
-    <loc>https://hif.icu/uncategorized/undefined/</loc>
+    <loc>https://hif.icu/about/index.html</loc>
     
-    <lastmod>2023-05-31</lastmod>
+    <lastmod>2023-08-31</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -28,6 +28,34 @@
   </url>
 
   
+  <url>
+    <loc>https://hif.icu/tags/Linux/</loc>
+    <lastmod>2023-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hif.icu/tags/Docker/</loc>
+    <lastmod>2023-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hif.icu/tags/Redis/</loc>
+    <lastmod>2023-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
+  
+  <url>
+    <loc>https://hif.icu/categories/Tutorials/</loc>
+    <lastmod>2023-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
   
 </urlset>
