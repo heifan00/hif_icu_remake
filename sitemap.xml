@@ -4,7 +4,16 @@
   <url>
     <loc>https://hif.icu/linux_docker_redis/</loc>
     
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2023-09-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hif.icu/error_lambda_final/</loc>
+    
+    <lastmod>2023-09-15</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -13,7 +22,7 @@
   <url>
     <loc>https://hif.icu/about/index.html</loc>
     
-    <lastmod>2023-08-31</lastmod>
+    <lastmod>2023-09-15</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -22,7 +31,7 @@
 
   <url>
     <loc>https://hif.icu/</loc>
-    <lastmod>2023-09-08</lastmod>
+    <lastmod>2023-09-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -30,21 +39,35 @@
   
   <url>
     <loc>https://hif.icu/tags/Linux/</loc>
-    <lastmod>2023-09-08</lastmod>
+    <lastmod>2023-09-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://hif.icu/tags/Docker/</loc>
-    <lastmod>2023-09-08</lastmod>
+    <lastmod>2023-09-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://hif.icu/tags/Redis/</loc>
-    <lastmod>2023-09-08</lastmod>
+    <lastmod>2023-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hif.icu/tags/ERROR/</loc>
+    <lastmod>2023-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hif.icu/tags/Java/</loc>
+    <lastmod>2023-09-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -53,7 +76,14 @@
   
   <url>
     <loc>https://hif.icu/categories/Tutorials/</loc>
-    <lastmod>2023-09-08</lastmod>
+    <lastmod>2023-09-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hif.icu/categories/Java/</loc>
+    <lastmod>2023-09-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

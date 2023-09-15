@@ -1,7 +1,11 @@
 https://hif.icu/linux_docker_redis/
+https://hif.icu/error_lambda_final/
 https://hif.icu/about/index.html
 https://hif.icu/
 https://hif.icu/tags/Linux/
 https://hif.icu/tags/Docker/
 https://hif.icu/tags/Redis/
+https://hif.icu/tags/ERROR/
+https://hif.icu/tags/Java/
 https://hif.icu/categories/Tutorials/
+https://hif.icu/categories/Java/
