@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://hif.icu//linux_docker_redis/</loc>
+    <loc>https://hif.icu//error_lambda_final/</loc>
     <lastmod>2023-09-15</lastmod>
   </url>
   <url>
-    <loc>https://hif.icu//error_lambda_final/</loc>
+    <loc>https://hif.icu//linux_docker_redis/</loc>
     <lastmod>2023-09-15</lastmod>
   </url>
 </urlset> 
