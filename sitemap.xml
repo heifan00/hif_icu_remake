@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://hif.icu/git_dev_v1/</loc>
+    
+    <lastmod>2023-10-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hif.icu/error_lambda_final/</loc>
     
     <lastmod>2023-09-15</lastmod>
@@ -31,7 +40,7 @@
 
   <url>
     <loc>https://hif.icu/</loc>
-    <lastmod>2023-09-15</lastmod>
+    <lastmod>2023-10-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -39,35 +48,49 @@
   
   <url>
     <loc>https://hif.icu/tags/Linux/</loc>
-    <lastmod>2023-09-15</lastmod>
+    <lastmod>2023-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://hif.icu/tags/Docker/</loc>
-    <lastmod>2023-09-15</lastmod>
+    <lastmod>2023-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://hif.icu/tags/Redis/</loc>
-    <lastmod>2023-09-15</lastmod>
+    <lastmod>2023-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://hif.icu/tags/ERROR/</loc>
-    <lastmod>2023-09-15</lastmod>
+    <lastmod>2023-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://hif.icu/tags/Java/</loc>
-    <lastmod>2023-09-15</lastmod>
+    <lastmod>2023-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hif.icu/tags/Git/</loc>
+    <lastmod>2023-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hif.icu/tags/%E8%A7%84%E8%8C%83/</loc>
+    <lastmod>2023-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -76,14 +99,14 @@
   
   <url>
     <loc>https://hif.icu/categories/Tutorials/</loc>
-    <lastmod>2023-09-15</lastmod>
+    <lastmod>2023-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://hif.icu/categories/Java/</loc>
-    <lastmod>2023-09-15</lastmod>
+    <lastmod>2023-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
