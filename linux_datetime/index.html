@@ -16,23 +16,25 @@
   <meta name="author" content="HiF">
   <meta name="keywords" content="">
   
-    <meta name="description" content="分支规范 git 分支分为集成分支、功能分支和修复分支，分别命名为 develop、feature 和 hotfix，均为单数。不可使用 features、future、hotfixes、hotfixs 等错误名称。  1.git主分支(master)。它是自动建立，用于发布重大版本更新（github 现在默认是是main 因种族歧视问题）2.git开发主分支(develop)。日常开发在此分支上">
+    <meta name="description" content="问题使用date命令查看系统时间，显示正常，但日志记录里的时间是错误的。 原因一台Linux服务器有两个时间源，一个是硬件时间，即服务器硬件CMOS维护的时间，还有一个是软件时间，即操作系统维护的时间，前者通过hwclock命令来访问，后者则主要通过date命令来访问。  解决123456789# 获取系统硬件时间$ sudo hwclockFri 23 Jan 2015 03:33:17 PM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git开发流程规范「v1」">
-<meta property="og:url" content="https://hif.icu/git_dev_v1/index.html">
+<meta property="og:title" content="Linux校准服务器时间">
+<meta property="og:url" content="https://hif.icu/linux_datetime/index.html">
 <meta property="og:site_name" content="嘿凡">
-<meta property="og:description" content="分支规范 git 分支分为集成分支、功能分支和修复分支，分别命名为 develop、feature 和 hotfix，均为单数。不可使用 features、future、hotfixes、hotfixs 等错误名称。  1.git主分支(master)。它是自动建立，用于发布重大版本更新（github 现在默认是是main 因种族歧视问题）2.git开发主分支(develop)。日常开发在此分支上">
+<meta property="og:description" content="问题使用date命令查看系统时间，显示正常，但日志记录里的时间是错误的。 原因一台Linux服务器有两个时间源，一个是硬件时间，即服务器硬件CMOS维护的时间，还有一个是软件时间，即操作系统维护的时间，前者通过hwclock命令来访问，后者则主要通过date命令来访问。  解决123456789# 获取系统硬件时间$ sudo hwclockFri 23 Jan 2015 03:33:17 PM">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-10-09T02:05:59.000Z">
-<meta property="article:modified_time" content="2023-10-09T02:12:43.054Z">
+<meta property="og:image" content="https://oss.keaijing.com/oss/icu/Snipaste_2023-10-16_14-57-04.png">
+<meta property="article:published_time" content="2023-10-17T03:36:32.557Z">
+<meta property="article:modified_time" content="2023-10-17T03:39:22.786Z">
 <meta property="article:author" content="HiF">
-<meta property="article:tag" content="Git">
-<meta property="article:tag" content="规范">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="运维">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://oss.keaijing.com/oss/icu/Snipaste_2023-10-16_14-57-04.png">
   
   
   
-  <title>Git开发流程规范「v1」 - 嘿凡</title>
+  <title>Linux校准服务器时间 - 嘿凡</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -262,7 +264,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Git开发流程规范「v1」"></span>
+            <span id="subtitle" data-typed-text="Linux校准服务器时间"></span>
           
         </div>
 
@@ -273,8 +275,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-09 10:05" pubdate>
-          2023年10月9日 上午
+        <time datetime="2023-10-17 11:36" pubdate>
+          2023年10月17日 中午
         </time>
       </span>
     
@@ -285,7 +287,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          533 字
         
       </span>
     
@@ -296,7 +298,7 @@
         
         
         
-          17 分钟
+          5 分钟
         
       </span>
     
@@ -333,43 +335,17 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Git开发流程规范「v1」</h1>
+            <h1 id="seo-header">Linux校准服务器时间</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="分支规范"><a href="#分支规范" class="headerlink" title="分支规范"></a>分支规范</h2><blockquote>
-<p>git 分支分为集成分支、功能分支和修复分支，分别命名为 develop、feature 和 hotfix，均为单数。不可使用 features、future、hotfixes、hotfixs 等错误名称。</p>
-</blockquote>
-<p>1.git主分支(master)。它是自动建立，用于发布重大版本更新（github 现在默认是是main 因种族歧视问题）<br>2.git开发主分支(develop)。日常开发在此分支上进行<br>3.git临时性分支：用于应对一些特定目的的版本开发(验证OK后，应该删除此分支)</p>
-<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><span class="hljs-bullet">- </span>功能（feature）分支：它是为了开发某种特定功能，从Develop分支上面分出来的。开发完成后，要再并入Develop。可以采用feature-的形式命名。<br><span class="hljs-bullet">- </span>预发布（release）分支：指发布正式版本之前（即合并到Master分支之前），我们可能需要有一个预发布的版本进行测试。预发布分支是从Develop分支上面分出来的，预发布结束以后，<br>必须合并进Develop和Master分支。它的命名，可以采用release-的形式。<br><span class="hljs-bullet">- </span>修补bug（hotfix）分支：软件正式发布以后，难免会出现bug。这时就需要创建一个分支，进行bug修补。修补bug分支是从Master或Develop分支上面分出来的。修补结束以后，<br>再合并进Master和Develop分支。它的命名，可以采用hotfix-<span class="hljs-strong">***</span>的形式。<br></code></pre></td></tr></table></figure>
+                <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>使用date命令查看系统时间，显示正常，但日志记录里的时间是错误的。</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>一台Linux服务器有两个时间源，一个是硬件时间，即服务器硬件CMOS维护的时间，还有一个是软件时间，即操作系统维护的时间，前者通过hwclock命令来访问，后者则主要通过date命令来访问。</p>
+<p><img src="https://oss.keaijing.com/oss/icu/Snipaste_2023-10-16_14-57-04.png" srcset="https://oss.keaijing.com/icu/img/loading.gif" lazyload alt="操作示例"></p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">获取系统硬件时间</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">sudo hwclock</span><br>Fri 23 Jan 2015 03:33:17 PM CST  -0.567492 seconds<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">设置操作系统的软件时间，与系统硬件时间同步</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">sudo hwclock -s</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">设置系统硬件时间，与操作系统的软件时间同步</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">sudo hwclock -w</span><br></code></pre></td></tr></table></figure>
 
-<h2 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程"></a>开发流程</h2><blockquote>
-<p>暂定临时分支feature、hotfix两种启用。暂不启用RP、code review。</p>
-</blockquote>
-<p>1.基于develop生成新临时开发分支。<br>2.测试、正式环境上线通过。<br>3.合并至develop分支，并生成对应的tag版本。<br>4.完成特定功能开发后(验证OK后，应该删除此分支)。<br>5.README.md文档中记录tag版本生成时间以及具体的功能名称。</p>
-<p>修复bug流程</p>
-<blockquote>
-<p>根据最新已经上线的分支代码创建hotfix分支。</p>
-</blockquote>
-<p>1.基于develop或者上个tag版本(根据实际情况而定)生成新临时开发分支。<br>2.测试、正式环境上线通过。<br>3.合并至develop分支，并生成对应的tag版本。<br>4.<code>若存在临时开发分支</code>-完成特定功能开发后(验证OK后，应该删除此分支)。<br>5.<code>若存在临时开发分支</code>-临时开发分支合并已经修复bug的develop代码。<br>6.<code>若存在临时开发分支</code>-临时开发分支完成特定功能开发后(验证OK后，应该删除此分支)。<br>7.README.md文档中记录tag版本生成时间以及具体的功能名称。</p>
-<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><h3 id="开发尺码"><a href="#开发尺码" class="headerlink" title="开发尺码"></a>开发尺码</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs lua">git checkout develop // 切换开发分支，git pull origin develop 并同步最新的develop分支代码。（强制）<br>git checkout -b feature-sizeGroup //基于develop分支创建新的开发分支（强制）<br>git push origin craftsAddUUID:craftsAddUUID //将本地新分支推送到远程（前本地，后远程）<br>git checkout develop // feature-sizeGroup完成上线后develop分支准备合并分支（强制）<br>git merge feature-sizeGroup // 合并开发功能分支（强制）<br>git tag -a v1<span class="hljs-number">.4</span> -m <span class="hljs-string">&quot;my version 1.4&quot;</span> // 合并完成创建标签备注中简单说明开发功能（强制）<br>git push origin v1<span class="hljs-number">.4</span> // 推送tag标签到远程仓库（强制）<br>git branch -d feature-sizeGroup //删除本地的临时开发分支(非强制)<br>git push origin <span class="hljs-comment">--delete feature-sizeGroup // 删除远程的临时开发分支（强制）</span><br>vim README.md // 保存新增tag版本记录（强制）<br>git add README.md // 追踪README.md文件。（强制）<br>git commit -m <span class="hljs-string">&quot;发布新的tag&quot;</span> // 将暂存区里的改动给提交到本地的版本库（强制）<br>git push origin develop // 推送改动后的develop（强制）<br></code></pre></td></tr></table></figure>
-
-<h3 id="master-合并周期"><a href="#master-合并周期" class="headerlink" title="master 合并周期"></a>master 合并周期</h3><blockquote>
-<p>每月月底最后几个工作日完成对master 对develop分支的合并。</p>
-</blockquote>
-<h3 id="tag-版本命名"><a href="#tag-版本命名" class="headerlink" title="tag 版本命名"></a>tag 版本命名</h3><blockquote>
-<p>版本命名规范</p>
-</blockquote>
-<ul>
-<li>版本: v1.1.1 ( Build 101001 )</li>
-<li>版本格式 bigVersion.middleVersion.smallVersion</li>
-<li>bigVersion 大版本(年度或者重大更新（强制更新，老版本存在不兼容等情况）) 取值范围 1-99</li>
-<li>middleVersion 迭代版本 取值范围 1-99</li>
-<li>smallVersion bug修复增强发布。 取值范围 1-999</li>
-<li>Build为版本纯数字格式化。</li>
-</ul>
-<h3 id="git帮助文档"><a href="#git帮助文档" class="headerlink" title="git帮助文档"></a>git帮助文档</h3><p><a target="_blank" rel="noopener" href="https://gitee.com/all-about-git">git 大全</a></p>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">如果系统用的是英文版的 utf8  则系统硬件时间会采用 12小时制时间表示法  即时间分为上午和下午</span><br>[root@xb-server ~]# cat /etc/locale.conf<br>LANG=&quot;en_US.UTF-8&quot;<br><span class="hljs-meta prompt_"># </span><span class="language-bash">如果系统用的是中文版的 utf8  则系统硬件时间会采用 24小时制时间表示法</span><br>[root@xb-server ~]# cat /etc/locale.conf<br>LANG=&quot;zh_CN.UTF-8&quot;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">刷新配置文件生效</span><br>source /etc/locale.conf <br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -403,9 +379,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Git/" class="print-no-link">#Git</a>
+        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
       
-        <a href="/tags/%E8%A7%84%E8%8C%83/" class="print-no-link">#规范</a>
+        <a href="/tags/%E8%BF%90%E7%BB%B4/" class="print-no-link">#运维</a>
       
     </div>
   
@@ -417,8 +393,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Git开发流程规范「v1」</div>
-      <div>https://hif.icu/git_dev_v1/</div>
+      <div>Linux校准服务器时间</div>
+      <div>https://hif.icu/linux_datetime/</div>
     </div>
     <div class="license-meta">
       
@@ -430,7 +406,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年10月9日</div>
+          <div>2023年10月17日</div>
         </div>
       
       
@@ -462,18 +438,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/linux_datetime/" title="Linux校准服务器时间">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Linux校准服务器时间</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/error_lambda_final/" title="【ERROR】Lambda表达式无法通过编译">
-                        <span class="hidden-mobile">【ERROR】Lambda表达式无法通过编译</span>
+                      <a href="/git_dev_v1/" title="Git开发流程规范「v1」">
+                        <span class="hidden-mobile">Git开发流程规范「v1」</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -1,3 +1,4 @@
+https://hif.icu/linux_datetime/
 https://hif.icu/git_dev_v1/
 https://hif.icu/error_lambda_final/
 https://hif.icu/linux_docker_redis/
@@ -10,5 +11,6 @@ https://hif.icu/tags/ERROR/
 https://hif.icu/tags/Java/
 https://hif.icu/tags/Git/
 https://hif.icu/tags/%E8%A7%84%E8%8C%83/
+https://hif.icu/tags/%E8%BF%90%E7%BB%B4/
 https://hif.icu/categories/Tutorials/
 https://hif.icu/categories/Java/

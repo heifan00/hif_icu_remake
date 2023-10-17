@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>Linux校准服务器时间</title>
+    <link href="/linux_datetime/"/>
+    <url>/linux_datetime/</url>
+    
+    <content type="html"><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>使用date命令查看系统时间，显示正常，但日志记录里的时间是错误的。</p><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>一台Linux服务器有两个时间源，一个是硬件时间，即服务器硬件CMOS维护的时间，还有一个是软件时间，即操作系统维护的时间，前者通过hwclock命令来访问，后者则主要通过date命令来访问。</p><p><img src="https://oss.keaijing.com/oss/icu/Snipaste_2023-10-16_14-57-04.png" alt="操作示例"></p><h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">获取系统硬件时间</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">sudo hwclock</span><br>Fri 23 Jan 2015 03:33:17 PM CST  -0.567492 seconds<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">设置操作系统的软件时间，与系统硬件时间同步</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">sudo hwclock -s</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">设置系统硬件时间，与操作系统的软件时间同步</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">sudo hwclock -w</span><br></code></pre></td></tr></table></figure><h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">如果系统用的是英文版的 utf8  则系统硬件时间会采用 12小时制时间表示法  即时间分为上午和下午</span><br>[root@xb-server ~]# cat /etc/locale.conf<br>LANG=&quot;en_US.UTF-8&quot;<br><span class="hljs-meta prompt_"># </span><span class="language-bash">如果系统用的是中文版的 utf8  则系统硬件时间会采用 24小时制时间表示法</span><br>[root@xb-server ~]# cat /etc/locale.conf<br>LANG=&quot;zh_CN.UTF-8&quot;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">刷新配置文件生效</span><br>source /etc/locale.conf <br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Tutorials</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>运维</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Git开发流程规范「v1」</title>
     <link href="/git_dev_v1/"/>
     <url>/git_dev_v1/</url>
