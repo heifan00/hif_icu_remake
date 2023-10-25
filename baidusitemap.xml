@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://hif.icu//springboot_dynmic/</loc>
+    <lastmod>2023-10-25</lastmod>
+  </url>
+  <url>
     <loc>https://hif.icu//linux_datetime/</loc>
     <lastmod>2023-10-17</lastmod>
   </url>

@@ -1,3 +1,4 @@
+https://hif.icu/springboot_dynmic/
 https://hif.icu/linux_datetime/
 https://hif.icu/git_dev_v1/
 https://hif.icu/error_lambda_final/
@@ -12,5 +13,7 @@ https://hif.icu/tags/Java/
 https://hif.icu/tags/Git/
 https://hif.icu/tags/%E8%A7%84%E8%8C%83/
 https://hif.icu/tags/%E8%BF%90%E7%BB%B4/
+https://hif.icu/tags/SpringBoot/
+https://hif.icu/tags/%E5%8A%A8%E6%80%81%E6%95%B0%E6%8D%AE%E6%BA%90/
 https://hif.icu/categories/Tutorials/
 https://hif.icu/categories/Java/
