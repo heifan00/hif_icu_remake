@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Github加速</title>
+    <link href="/github_gogogo/"/>
+    <url>/github_gogogo/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>今天由我来为大家分享几个不用加科技就能直接使用的<strong>Github镜像</strong>地址以及<strong>下载加速</strong>的地址！</p></blockquote><h2 id="访问加速"><a href="#访问加速" class="headerlink" title="访问加速"></a>访问加速</h2><ol><li><a href="https://hub.nuaa.cf/">https://hub.nuaa.cf/</a></li><li><a href="https://hub.yzuu.cf/">https://hub.yzuu.cf/</a></li><li><a href="https://hub.njuu.cf/">https://hub.njuu.cf/</a></li></ol><h2 id="下载加速"><a href="#下载加速" class="headerlink" title="下载加速"></a>下载加速</h2><blockquote><p>原始地址：<a href="https://github.com/Kong/insomnia/releases/download/core%408.4.2/insomnia-8.4.2-full.nupkg">https://github.com/Kong/insomnia/releases/download/core%408.4.2/insomnia-8.4.2-full.nupkg</a><br>使用方式：加速网址+原始地址</p></blockquote><ol><li><a href="https://github.abskoop.workers.dev/">https://github.abskoop.workers.dev/</a>{原始地址}</li><li><a href="https://gh.ddlc.top/">https://gh.ddlc.top/</a>{原始地址}</li><li><a href="https://ghps.cc/">https://ghps.cc/</a>{原始地址}</li><li><a href="https://ghproxy.com/">https://ghproxy.com/</a>{原始地址}</li></ol><p>原始地址合法输入示例：</p><ul><li>分支源码：<a href="https://github.com/hunshcn/project/archive/master.zip">https://github.com/hunshcn/project/archive/master.zip</a></li><li>release源码：<a href="https://github.com/hunshcn/project/archive/v0.1.0.tar.gz">https://github.com/hunshcn/project/archive/v0.1.0.tar.gz</a></li><li>release文件：<a href="https://github.com/hunshcn/project/releases/download/v0.1.0/example.zip">https://github.com/hunshcn/project/releases/download/v0.1.0/example.zip</a></li><li>分支文件：<a href="https://github.com/hunshcn/project/blob/master/filename">https://github.com/hunshcn/project/blob/master/filename</a></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Tutorials</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Github</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>SpringBoot实现多数据源，动态切换数据源</title>
     <link href="/springboot_dynmic/"/>
     <url>/springboot_dynmic/</url>
