@@ -1,3 +1,4 @@
+https://hif.icu/mysql_bak_oss/
 https://hif.icu/docker_mysql_bak/
 https://hif.icu/github_gogogo/
 https://hif.icu/springboot_dynmic/
@@ -20,5 +21,7 @@ https://hif.icu/tags/%E5%8A%A8%E6%80%81%E6%95%B0%E6%8D%AE%E6%BA%90/
 https://hif.icu/tags/Github/
 https://hif.icu/tags/MySQL/
 https://hif.icu/tags/%E5%A4%87%E4%BB%BD/
+https://hif.icu/tags/OSS/
+https://hif.icu/tags/%E4%B8%83%E7%89%9B%E4%BA%91/
 https://hif.icu/categories/Tutorials/
 https://hif.icu/categories/Java/

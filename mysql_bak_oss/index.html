@@ -16,24 +16,24 @@
   <meta name="author" content="HiF">
   <meta name="keywords" content="">
   
-    <meta name="description" content="对于部署在Docker容器里的数据库进行定时备份操作。  查看mysql容器ID1docker ps 创建存储备份文件的文件夹12cd &#x2F;datamkdir -p mysqlBak&#x2F;data mysqlBak&#x2F;log 修改备份脚本12345678910111213141516171819202122232425262728293031323334353637#!&#x2F;bin&#x2F;bash# 容器名称">
+    <meta name="description" content="mysqldump + 七牛云qshell实现备份并上传到OSS  编写备份脚本123456789101112131415161718192021222324252627282930313233343536#!&#x2F;bin&#x2F;bash#保存备份个数，备份7天数据backup_clean_day&#x3D;7#备份保存路径backup_dir&#x3D;&#x2F;data&#x2F;mysqlBak&#x2F;data#备份日志路径bakup_log">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker MySQL定时备份">
-<meta property="og:url" content="https://hif.icu/docker_mysql_bak/index.html">
+<meta property="og:title" content="MySQL定时备份并上传备份文件到七牛云">
+<meta property="og:url" content="https://hif.icu/mysql_bak_oss/index.html">
 <meta property="og:site_name" content="嘿凡">
-<meta property="og:description" content="对于部署在Docker容器里的数据库进行定时备份操作。  查看mysql容器ID1docker ps 创建存储备份文件的文件夹12cd &#x2F;datamkdir -p mysqlBak&#x2F;data mysqlBak&#x2F;log 修改备份脚本12345678910111213141516171819202122232425262728293031323334353637#!&#x2F;bin&#x2F;bash# 容器名称">
+<meta property="og:description" content="mysqldump + 七牛云qshell实现备份并上传到OSS  编写备份脚本123456789101112131415161718192021222324252627282930313233343536#!&#x2F;bin&#x2F;bash#保存备份个数，备份7天数据backup_clean_day&#x3D;7#备份保存路径backup_dir&#x3D;&#x2F;data&#x2F;mysqlBak&#x2F;data#备份日志路径bakup_log">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-12-19T08:07:32.000Z">
-<meta property="article:modified_time" content="2023-12-19T08:07:40.114Z">
+<meta property="article:published_time" content="2023-12-20T06:44:26.000Z">
+<meta property="article:modified_time" content="2023-12-20T06:44:41.251Z">
 <meta property="article:author" content="HiF">
-<meta property="article:tag" content="Docker">
 <meta property="article:tag" content="MySQL">
-<meta property="article:tag" content="备份">
+<meta property="article:tag" content="OSS">
+<meta property="article:tag" content="七牛云">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Docker MySQL定时备份 - 嘿凡</title>
+  <title>MySQL定时备份并上传备份文件到七牛云 - 嘿凡</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -263,7 +263,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Docker MySQL定时备份"></span>
+            <span id="subtitle" data-typed-text="MySQL定时备份并上传备份文件到七牛云"></span>
           
         </div>
 
@@ -274,8 +274,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-12-19 16:07" pubdate>
-          2023年12月19日 下午
+        <time datetime="2023-12-20 14:44" pubdate>
+          2023年12月20日 下午
         </time>
       </span>
     
@@ -286,7 +286,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k 字
+          2.3k 字
         
       </span>
     
@@ -297,7 +297,7 @@
         
         
         
-          18 分钟
+          20 分钟
         
       </span>
     
@@ -334,22 +334,24 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Docker MySQL定时备份</h1>
+            <h1 id="seo-header">MySQL定时备份并上传备份文件到七牛云</h1>
             
             
               <div class="markdown-body">
                 
                 <blockquote>
-<p>对于部署在Docker容器里的数据库进行定时备份操作。</p>
+<p>mysqldump + 七牛云qshell实现备份并上传到OSS</p>
 </blockquote>
-<h2 id="查看mysql容器ID"><a href="#查看mysql容器ID" class="headerlink" title="查看mysql容器ID"></a>查看mysql容器ID</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker ps<br></code></pre></td></tr></table></figure>
-<h2 id="创建存储备份文件的文件夹"><a href="#创建存储备份文件的文件夹" class="headerlink" title="创建存储备份文件的文件夹"></a>创建存储备份文件的文件夹</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /data<br><span class="hljs-built_in">mkdir</span> -p mysqlBak/data mysqlBak/log<br></code></pre></td></tr></table></figure>
-<h2 id="修改备份脚本"><a href="#修改备份脚本" class="headerlink" title="修改备份脚本"></a>修改备份脚本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-comment"># 容器名称  容器ID，容器名称都行，建议使用id，不会被更改</span><br>container_name=<span class="hljs-string">&quot;73eadb6f35e2&quot;</span><br><span class="hljs-comment"># 数据库账户</span><br>mysql_name=<span class="hljs-string">&quot;root&quot;</span><br><span class="hljs-comment"># 数据库密码</span><br>mysql_pwd=<span class="hljs-string">&quot;123456&quot;</span><br><span class="hljs-comment"># 数据库备份根目录</span><br>backup_dir=<span class="hljs-string">&quot;/data/mysqlBak/data&quot;</span><br>bakup_log=<span class="hljs-string">&quot;/data/mysqlBak/log&quot;</span><br><span class="hljs-comment"># 备份数据库</span><br>DATABASES=$(/usr/bin/docker <span class="hljs-built_in">exec</span> -i <span class="hljs-variable">$&#123;container_name&#125;</span> mysql -u<span class="hljs-variable">$&#123;mysql_name&#125;</span> -p<span class="hljs-variable">$&#123;mysql_pwd&#125;</span> -e <span class="hljs-string">&quot;show databases&quot;</span> | grep -Ev <span class="hljs-string">&quot;Database|sys|information_schema|performance_schema|mysql|brp_log&quot;</span>)<br><span class="hljs-comment"># 备份数据保留天数</span><br>backup_clean_day=5<br><span class="hljs-comment">#如果文件夹不存在则创建</span><br><span class="hljs-keyword">if</span> [ ! -d <span class="hljs-variable">$backup_dir</span> ];<br><span class="hljs-keyword">then</span>     <br>                <span class="hljs-built_in">mkdir</span> -p <span class="hljs-variable">$back_dir</span>;<br><span class="hljs-keyword">fi</span><br><br><span class="hljs-comment">#循环数据库进行备份</span><br><span class="hljs-keyword">for</span> db <span class="hljs-keyword">in</span>  <span class="hljs-variable">$DATABASES</span><br><span class="hljs-keyword">do</span><br>        <span class="hljs-built_in">echo</span><br>        <span class="hljs-built_in">echo</span> ----------<span class="hljs-variable">$BACKUP_FILEDIR</span>/<span class="hljs-variable">$&#123;db&#125;</span>_`<span class="hljs-built_in">date</span> <span class="hljs-string">&quot;+%Y_%m_%d_%H_%M_%S&quot;</span>`.sql.gz BEGIN----------<br><br>        /usr/bin/docker <span class="hljs-built_in">exec</span> -i <span class="hljs-variable">$&#123;container_name&#125;</span>  mysqldump -u<span class="hljs-variable">$&#123;mysql_name&#125;</span> -p<span class="hljs-variable">$&#123;mysql_pwd&#125;</span> --default-character-set=utf8mb4 --single-transaction --source-data=2 --flush-logs --hex-blob --triggers --routines --events --databases <span class="hljs-variable">$&#123;db&#125;</span> |  gzip &gt; <span class="hljs-variable">$&#123;backup_dir&#125;</span>/<span class="hljs-variable">$&#123;db&#125;</span>`<span class="hljs-built_in">date</span> <span class="hljs-string">&quot;+%Y_%m_%d_%H_%M_%S&quot;</span>`.sql.gz<br><br>        <span class="hljs-comment">#写创建备份日志</span><br>        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;create <span class="hljs-variable">$bakup_log</span>/<span class="hljs-variable">$&#123;db&#125;</span>-`date &quot;</span>+%Y_%m_%d_%H_%M_%S<span class="hljs-string">&quot;`.dupm&quot;</span> &gt;&gt; <span class="hljs-variable">$bakup_log</span>/log.txt<br>        <span class="hljs-built_in">echo</span> ----------<span class="hljs-variable">$BACKUP_FILEDIR</span>/<span class="hljs-variable">$&#123;db&#125;</span>_`<span class="hljs-built_in">date</span> <span class="hljs-string">&quot;+%Y_%m_%d_%H_%M_%S&quot;</span>`.sql.gz COMPLETE----------<br>        <span class="hljs-built_in">echo</span><br><span class="hljs-keyword">done</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;done&quot;</span><br><span class="hljs-comment">#删除5天之前的备份</span><br>find <span class="hljs-variable">$&#123;backup_dir&#125;</span> -<span class="hljs-built_in">type</span> f -mtime +<span class="hljs-variable">$&#123;backup_clean_day&#125;</span> -delete<br><br></code></pre></td></tr></table></figure>
-<h2 id="上传和运行脚本"><a href="#上传和运行脚本" class="headerlink" title="上传和运行脚本"></a>上传和运行脚本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 赋予权限</span><br><span class="hljs-built_in">chmod</span> a+x sqlbak.sh<br><span class="hljs-comment"># 执行脚本</span><br>./sqlbak.sh<br></code></pre></td></tr></table></figure>
-<h2 id="设置每天凌晨一点执行"><a href="#设置每天凌晨一点执行" class="headerlink" title="设置每天凌晨一点执行"></a>设置每天凌晨一点执行</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 打开定时任务配置文件</span><br>crontab -b<br><span class="hljs-comment"># 编写文件</span><br><span class="hljs-comment"># 定时每天凌晨一点备份数据</span><br>0 1 * * * /data/mysqlBak/sqlbak.sh<br></code></pre></td></tr></table></figure>
-<h2 id="可能出现的问题"><a href="#可能出现的问题" class="headerlink" title="可能出现的问题"></a>可能出现的问题</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysqldump: [ERROR] unknown variable <span class="hljs-string">&#x27;source-data=2&#x27;</span><br></code></pre></td></tr></table></figure>
-<p>原因：版本问题，5.7版本参数为**–master-data&#x3D;2**<br>解决方式：替换备份参数</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 备份语句</span><br>/usr/bin/docker <span class="hljs-built_in">exec</span> -i <span class="hljs-variable">$&#123;container_name&#125;</span>  mysqldump -u<span class="hljs-variable">$&#123;mysql_name&#125;</span> -p<span class="hljs-variable">$&#123;mysql_pwd&#125;</span> --default-character-set=utf8mb4 --single-transaction --master-data=2 --flush-logs --hex-blob --triggers --routines --events --databases <span class="hljs-variable">$&#123;db&#125;</span> |  gzip &gt; <span class="hljs-variable">$&#123;backup_dir&#125;</span>/<span class="hljs-variable">$&#123;db&#125;</span>`<span class="hljs-built_in">date</span> <span class="hljs-string">&quot;+%Y_%m_%d_%H_%M_%S&quot;</span>`.sql.gz<br></code></pre></td></tr></table></figure>
+<h2 id="编写备份脚本"><a href="#编写备份脚本" class="headerlink" title="编写备份脚本"></a>编写备份脚本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-comment">#保存备份个数，备份7天数据</span><br>backup_clean_day=7<br><span class="hljs-comment">#备份保存路径</span><br>backup_dir=/data/mysqlBak/data<br><span class="hljs-comment">#备份日志路径</span><br>bakup_log=/data/mysqlBak/log<br><span class="hljs-comment">#日期</span><br><span class="hljs-built_in">dd</span>=`<span class="hljs-built_in">date</span> +%Y%m%d%H%M%S`<br><span class="hljs-comment">#用户名</span><br>username=root<br><span class="hljs-comment">#密码</span><br>password=123456<br><span class="hljs-comment">#如果文件夹不存在则创建</span><br><span class="hljs-keyword">if</span> [ ! -d <span class="hljs-variable">$back_dir</span> ];<br><span class="hljs-keyword">then</span>     <br>     <span class="hljs-built_in">mkdir</span> -p <span class="hljs-variable">$backup_dir</span>;<br><span class="hljs-keyword">fi</span><br><span class="hljs-comment">#将要备份的数据库</span><br>DATABASES=$(mysql -u<span class="hljs-variable">$username</span> -p<span class="hljs-variable">$password</span> -e <span class="hljs-string">&quot;show databases&quot;</span> | grep -Ev <span class="hljs-string">&quot;Database|sys|performance_schema|mysql|brp_log|information_schema&quot;</span>)<br><br><span class="hljs-comment">#循环数据库进行备份</span><br><span class="hljs-keyword">for</span> db <span class="hljs-keyword">in</span>  <span class="hljs-variable">$DATABASES</span><br><span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">echo</span><br>    <span class="hljs-built_in">echo</span> ----------<span class="hljs-variable">$backup_dir</span>/<span class="hljs-variable">$&#123;db&#125;</span>-<span class="hljs-variable">$&#123;dd&#125;</span>.sql.gz BEGIN----------<br>    mysqldump -u <span class="hljs-variable">$username</span> -p<span class="hljs-variable">$password</span> --default-character-set=utf8mb4 --single-transaction --source-data=2 --flush-logs --hex-blob --triggers --routines --events --databases <span class="hljs-variable">$&#123;db&#125;</span> |  gzip &gt; <span class="hljs-variable">$&#123;backup_dir&#125;</span>/<span class="hljs-variable">$&#123;db&#125;</span>-<span class="hljs-variable">$&#123;dd&#125;</span>.sql.gz<br><br>                <span class="hljs-comment">#写创建备份日志</span><br>  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;create <span class="hljs-variable">$bakup_log</span>/<span class="hljs-variable">$&#123;db&#125;</span>-<span class="hljs-variable">$&#123;dd&#125;</span>.dupm&quot;</span> &gt;&gt; <span class="hljs-variable">$bakup_log</span>/log.txt<br>  <span class="hljs-built_in">echo</span> ----------<span class="hljs-variable">$backup_dir</span>/<span class="hljs-variable">$&#123;db&#125;</span>-<span class="hljs-variable">$&#123;dd&#125;</span>.sql.gz COMPLETE----------<br>        <span class="hljs-built_in">echo</span><br><span class="hljs-keyword">done</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;done&quot;</span><br><span class="hljs-comment">#删除7天之前的备份</span><br>find <span class="hljs-variable">$&#123;backup_dir&#125;</span> -<span class="hljs-built_in">type</span> f -mtime +<span class="hljs-variable">$&#123;backup_clean_day&#125;</span> -delete<br></code></pre></td></tr></table></figure>
+<h2 id="安装七牛云qshell工具"><a href="#安装七牛云qshell工具" class="headerlink" title="安装七牛云qshell工具"></a>安装七牛云qshell工具</h2><p><a target="_blank" rel="noopener" href="https://developer.qiniu.com/kodo/1302/qshell">七牛云qshell工具下载</a></p>
+<h2 id="配置qupload命令配置文件"><a href="#配置qupload命令配置文件" class="headerlink" title="配置qupload命令配置文件"></a>配置qupload命令配置文件</h2><p><a target="_blank" rel="noopener" href="https://github.com/qiniu/qshell/blob/master/docs/qupload.md">qupload参数说明文档</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs bash">&#123;<br>   <span class="hljs-string">&quot;src_dir&quot;</span>            :   <span class="hljs-string">&quot;/data/mysqlBak/data&quot;</span>,<br>   <span class="hljs-string">&quot;bucket&quot;</span>             :   <span class="hljs-string">&quot;sql-bak&quot;</span>,<br>   <span class="hljs-string">&quot;key_prefix&quot;</span>         :   <span class="hljs-string">&quot;bak_&quot;</span>,<br>   <span class="hljs-string">&quot;ignore_dir&quot;</span>         :   <span class="hljs-literal">false</span>,<br>   <span class="hljs-string">&quot;overwrite&quot;</span>          :   <span class="hljs-literal">false</span>,<br>   <span class="hljs-string">&quot;check_exists&quot;</span>       :   <span class="hljs-literal">true</span>,<br>   <span class="hljs-string">&quot;check_hash&quot;</span>         :   <span class="hljs-literal">false</span>,<br>   <span class="hljs-string">&quot;check_size&quot;</span>         :   <span class="hljs-literal">true</span>,<br>   <span class="hljs-string">&quot;rescan_local&quot;</span>       :   <span class="hljs-literal">false</span>,<br>   <span class="hljs-string">&quot;skip_file_prefixes&quot;</span> :   <span class="hljs-string">&quot;test,demo,&quot;</span>,<br>   <span class="hljs-string">&quot;skip_path_prefixes&quot;</span> :   <span class="hljs-string">&quot;hello/,temp/&quot;</span>,<br>   <span class="hljs-string">&quot;skip_fixed_strings&quot;</span> :   <span class="hljs-string">&quot;.svn,.git&quot;</span>,<br>   <span class="hljs-string">&quot;skip_suffixes&quot;</span>      :   <span class="hljs-string">&quot;.DS_Store,.exe&quot;</span>,<br>   <span class="hljs-string">&quot;log_file&quot;</span>           :   <span class="hljs-string">&quot;upload.log&quot;</span>,<br>   <span class="hljs-string">&quot;log_level&quot;</span>          :   <span class="hljs-string">&quot;info&quot;</span>,<br>   <span class="hljs-string">&quot;log_rotate&quot;</span>         :   10,<br>   <span class="hljs-string">&quot;log_stdout&quot;</span>         :   <span class="hljs-literal">true</span>,<br>   <span class="hljs-string">&quot;file_type&quot;</span>          :   2,<br>   <span class="hljs-string">&quot;resumable_api_v2&quot;</span>   :   <span class="hljs-literal">false</span>,<br>   <span class="hljs-string">&quot;resumable_api_v2_part_size&quot;</span> : 4194304<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="运行命令"><a href="#运行命令" class="headerlink" title="运行命令"></a>运行命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./qshell qupload ./config/upload.conf <br></code></pre></td></tr></table></figure>
+<p>查看上传日志，上传成功后到七牛云后台检查是否上传成功。</p>
+<h2 id="配置定时执行"><a href="#配置定时执行" class="headerlink" title="配置定时执行"></a>配置定时执行</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 编写定时任务</span><br>crontab -e<br>===========<br><span class="hljs-comment"># 定时每天一点备份数据</span><br>0 1 * * * /data/mysqlBak/mysql-bak.sh<br><span class="hljs-comment"># 定时每天两点同步到七牛</span><br>0 2 * * * /data/qiniu/qshell qupload /data/qiniu/config/upload.conf<br></code></pre></td></tr></table></figure>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li>七牛云的AS&#x2F;SK建议使用子账号，严格控制权限，只赋予指定bucket的上传权限。</li>
+</ol>
 
                 
               </div>
@@ -383,11 +385,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Docker/" class="print-no-link">#Docker</a>
-      
         <a href="/tags/MySQL/" class="print-no-link">#MySQL</a>
       
-        <a href="/tags/%E5%A4%87%E4%BB%BD/" class="print-no-link">#备份</a>
+        <a href="/tags/OSS/" class="print-no-link">#OSS</a>
+      
+        <a href="/tags/%E4%B8%83%E7%89%9B%E4%BA%91/" class="print-no-link">#七牛云</a>
       
     </div>
   
@@ -399,8 +401,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Docker MySQL定时备份</div>
-      <div>https://hif.icu/docker_mysql_bak/</div>
+      <div>MySQL定时备份并上传备份文件到七牛云</div>
+      <div>https://hif.icu/mysql_bak_oss/</div>
     </div>
     <div class="license-meta">
       
@@ -412,7 +414,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年12月19日</div>
+          <div>2023年12月20日</div>
         </div>
       
       
@@ -444,18 +446,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/mysql_bak_oss/" title="MySQL定时备份并上传备份文件到七牛云">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MySQL定时备份并上传备份文件到七牛云</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/github_gogogo/" title="Github加速">
-                        <span class="hidden-mobile">Github加速</span>
+                      <a href="/docker_mysql_bak/" title="Docker MySQL定时备份">
+                        <span class="hidden-mobile">Docker MySQL定时备份</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
