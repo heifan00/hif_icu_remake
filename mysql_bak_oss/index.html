@@ -24,7 +24,7 @@
 <meta property="og:description" content="mysqldump + 七牛云qshell实现备份并上传到OSS  编写备份脚本123456789101112131415161718192021222324252627282930313233343536#!&#x2F;bin&#x2F;bash#保存备份个数，备份7天数据backup_clean_day&#x3D;7#备份保存路径backup_dir&#x3D;&#x2F;data&#x2F;mysqlBak&#x2F;data#备份日志路径bakup_log">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-12-20T06:44:26.000Z">
-<meta property="article:modified_time" content="2023-12-20T06:44:41.251Z">
+<meta property="article:modified_time" content="2023-12-21T01:58:09.386Z">
 <meta property="article:author" content="HiF">
 <meta property="article:tag" content="MySQL">
 <meta property="article:tag" content="OSS">
@@ -286,7 +286,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k 字
+          2.6k 字
         
       </span>
     
@@ -297,7 +297,7 @@
         
         
         
-          20 分钟
+          22 分钟
         
       </span>
     
@@ -348,9 +348,13 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs bash">&#123;<br>   <span class="hljs-string">&quot;src_dir&quot;</span>            :   <span class="hljs-string">&quot;/data/mysqlBak/data&quot;</span>,<br>   <span class="hljs-string">&quot;bucket&quot;</span>             :   <span class="hljs-string">&quot;sql-bak&quot;</span>,<br>   <span class="hljs-string">&quot;key_prefix&quot;</span>         :   <span class="hljs-string">&quot;bak_&quot;</span>,<br>   <span class="hljs-string">&quot;ignore_dir&quot;</span>         :   <span class="hljs-literal">false</span>,<br>   <span class="hljs-string">&quot;overwrite&quot;</span>          :   <span class="hljs-literal">false</span>,<br>   <span class="hljs-string">&quot;check_exists&quot;</span>       :   <span class="hljs-literal">true</span>,<br>   <span class="hljs-string">&quot;check_hash&quot;</span>         :   <span class="hljs-literal">false</span>,<br>   <span class="hljs-string">&quot;check_size&quot;</span>         :   <span class="hljs-literal">true</span>,<br>   <span class="hljs-string">&quot;rescan_local&quot;</span>       :   <span class="hljs-literal">false</span>,<br>   <span class="hljs-string">&quot;skip_file_prefixes&quot;</span> :   <span class="hljs-string">&quot;test,demo,&quot;</span>,<br>   <span class="hljs-string">&quot;skip_path_prefixes&quot;</span> :   <span class="hljs-string">&quot;hello/,temp/&quot;</span>,<br>   <span class="hljs-string">&quot;skip_fixed_strings&quot;</span> :   <span class="hljs-string">&quot;.svn,.git&quot;</span>,<br>   <span class="hljs-string">&quot;skip_suffixes&quot;</span>      :   <span class="hljs-string">&quot;.DS_Store,.exe&quot;</span>,<br>   <span class="hljs-string">&quot;log_file&quot;</span>           :   <span class="hljs-string">&quot;upload.log&quot;</span>,<br>   <span class="hljs-string">&quot;log_level&quot;</span>          :   <span class="hljs-string">&quot;info&quot;</span>,<br>   <span class="hljs-string">&quot;log_rotate&quot;</span>         :   10,<br>   <span class="hljs-string">&quot;log_stdout&quot;</span>         :   <span class="hljs-literal">true</span>,<br>   <span class="hljs-string">&quot;file_type&quot;</span>          :   2,<br>   <span class="hljs-string">&quot;resumable_api_v2&quot;</span>   :   <span class="hljs-literal">false</span>,<br>   <span class="hljs-string">&quot;resumable_api_v2_part_size&quot;</span> : 4194304<br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="运行命令"><a href="#运行命令" class="headerlink" title="运行命令"></a>运行命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./qshell qupload ./config/upload.conf <br></code></pre></td></tr></table></figure>
 <p>查看上传日志，上传成功后到七牛云后台检查是否上传成功。</p>
-<h2 id="配置定时执行"><a href="#配置定时执行" class="headerlink" title="配置定时执行"></a>配置定时执行</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 编写定时任务</span><br>crontab -e<br>===========<br><span class="hljs-comment"># 定时每天一点备份数据</span><br>0 1 * * * /data/mysqlBak/mysql-bak.sh<br><span class="hljs-comment"># 定时每天两点同步到七牛</span><br>0 2 * * * /data/qiniu/qshell qupload /data/qiniu/config/upload.conf<br></code></pre></td></tr></table></figure>
+<h2 id="编写定时上传脚本"><a href="#编写定时上传脚本" class="headerlink" title="编写定时上传脚本"></a>编写定时上传脚本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-comment">#日期</span><br><span class="hljs-built_in">dd</span>=`<span class="hljs-built_in">date</span> +%Y%m%d%H%M%S`<br><span class="hljs-built_in">echo</span> ----------<span class="hljs-string">&quot;删除缓存文件夹&quot;</span>----------<br><span class="hljs-built_in">rm</span> -rf /root/.qshell/users/username/qupload<br><br><span class="hljs-built_in">echo</span> ----------<span class="hljs-string">&quot;开始上传到七牛云-<span class="hljs-variable">$&#123;dd&#125;</span>&quot;</span>----------<br>/data/qiniu/qshell qupload /data/qiniu/config/upload.conf<br><span class="hljs-built_in">echo</span> ----------<span class="hljs-string">&quot;上传到七牛云成功！&quot;</span>----------<br></code></pre></td></tr></table></figure>
+
+<h2 id="配置定时执行"><a href="#配置定时执行" class="headerlink" title="配置定时执行"></a>配置定时执行</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 编写定时任务</span><br>crontab -e<br>===========<br><span class="hljs-comment"># 定时每天一点备份数据</span><br>0 1 * * * /data/mysqlBak/mysql-bak.sh<br><span class="hljs-comment"># 定时每天两点同步到七牛</span><br>0 2 * * * /data/mysqlBak/upload-sql.sh<br></code></pre></td></tr></table></figure>
+
 <h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
 <li>七牛云的AS&#x2F;SK建议使用子账号，严格控制权限，只赋予指定bucket的上传权限。</li>
+<li>一定要在上传前删除缓存文件夹，不然下次上传无法读取新的文件。</li>
 </ol>
 
                 
