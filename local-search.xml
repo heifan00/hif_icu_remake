@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>解决MySQL排序规则不一致导致的报错</title>
+    <link href="/mysql_collation_error/"/>
+    <url>/mysql_collation_error/</url>
+    
+    <content type="html"><![CDATA[<h2 id="报错信息"><a href="#报错信息" class="headerlink" title="报错信息"></a>报错信息</h2><p>Illegal mix of collations (utf8mb4_general_ci,IMPLICIT) and (utf8mb4_0900_ai_ci,IMPLICIT) for operation ‘&#x3D;’</p> <span id="more"></span> <h2 id="报错原因"><a href="#报错原因" class="headerlink" title="报错原因"></a>报错原因</h2><p>collation不兼容，一个是 utf8mb4_0900_ai_ci，另一个是utf8mb4_general_ci。</p><p>MySQL8 默认排序规则是 utf8mb4_0900_ai_ci。</p><p>可以使用以下语句查询：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SHOW</span> VARIABLES <span class="hljs-keyword">LIKE</span> <span class="hljs-string">&#x27;collation%&#x27;</span>;<br></code></pre></td></tr></table></figure><h2 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h2><ol><li><p>设置默认排序规则为<strong>utf8mb4_general_ci</strong></p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SET</span> <span class="hljs-keyword">GLOBAL</span> COLLATION_CONNECTION <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;utf8mb4_general_ci&#x27;</span>;<br></code></pre></td></tr></table></figure></li><li><p>修改报错信息涉及单表的排序规则</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> tabaleName <span class="hljs-keyword">CONVERT</span> <span class="hljs-keyword">TO</span> <span class="hljs-type">CHARACTER</span> <span class="hljs-keyword">SET</span> utf8 <span class="hljs-keyword">COLLATE</span> utf8_general_ci;<br></code></pre></td></tr></table></figure></li><li><p>使用Shell脚本批量更改数据库表的排序规则</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/bash</span>  <br><span class="hljs-meta prompt_"># </span><span class="language-bash">MySQL数据库连接信息</span>  <br>DB_HOST=&quot;localhost&quot;  <br>DB_USER=&quot;root&quot;  <br>DB_PASS=&quot;123456&quot;  <br>DB_NAME=&quot;test&quot;  <br><span class="hljs-meta prompt_">  </span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">获取表名的SQL查询语句</span>  <br>TABLES_QUERY=&quot;SHOW TABLES FROM $DB_NAME&quot;  <br><span class="hljs-meta prompt_">  </span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">执行SQL查询并获取结果</span>  <br>TABLES=$(mysql -h &quot;$DB_HOST&quot; -u &quot;$DB_USER&quot; -p&quot;$DB_PASS&quot; -D &quot;$DB_NAME&quot; -N -B -e &quot;$TABLES_QUERY&quot;)  <br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">遍历执行</span>  <br>echo &quot;$TABLES&quot; | while read TABLE; do <br>echo &quot;开始转换====&gt;$TABLE&quot;  <br>    echo &quot;ALTER TABLE $TABLE CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci&quot; | mysql -h &quot;$DB_HOST&quot; -u &quot;$DB_USER&quot; -p&quot;$DB_PASS&quot; -D &quot;$DB_NAME&quot;  <br>done<br></code></pre></td></tr></table></figure></li></ol><h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol><li>注意查看数据库版本，不同的版本有不同的默认设置，也可能会出现语句执行不生效的情况；</li><li>规范开发的情况下，测试和正式数据库版本应该是一致的，因为数据版本混乱，我才会遇到这个问题。</li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>Error</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>MySQL</tag>
+      
+      <tag>Shell</tag>
+      
+      <tag>error</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>MySQL定时备份并上传备份文件到七牛云</title>
     <link href="/mysql_bak_oss/"/>
     <url>/mysql_bak_oss/</url>
@@ -177,7 +206,7 @@
     
     <categories>
       
-      <category>Java</category>
+      <category>Error</category>
       
     </categories>
     

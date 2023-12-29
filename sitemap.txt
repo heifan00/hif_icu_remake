@@ -1,10 +1,11 @@
+https://hif.icu/error_lambda_final/
+https://hif.icu/mysql_collation_error/
 https://hif.icu/mysql_bak_oss/
 https://hif.icu/docker_mysql_bak/
 https://hif.icu/github_gogogo/
 https://hif.icu/springboot_dynmic/
 https://hif.icu/linux_datetime/
 https://hif.icu/git_dev_v1/
-https://hif.icu/error_lambda_final/
 https://hif.icu/linux_docker_redis/
 https://hif.icu/about/index.html
 https://hif.icu/
@@ -23,5 +24,7 @@ https://hif.icu/tags/MySQL/
 https://hif.icu/tags/%E5%A4%87%E4%BB%BD/
 https://hif.icu/tags/OSS/
 https://hif.icu/tags/%E4%B8%83%E7%89%9B%E4%BA%91/
+https://hif.icu/tags/Shell/
+https://hif.icu/tags/error/
 https://hif.icu/categories/Tutorials/
-https://hif.icu/categories/Java/
+https://hif.icu/categories/Error/
